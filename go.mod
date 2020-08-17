@@ -1,4 +1,4 @@
-module OsmStatic
+module github.com/neonxp/StaticMap
 
 go 1.14
 

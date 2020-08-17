@@ -1,8 +1,8 @@
 /*
-Copyright © 2020 Alexander Kiryukhin <ak@bytechain.ru>
-This file is part of OsmStatic project.
+Copyright © 2020 Alexander Kiryukhin <a.kiryukhin@mail.ru>
+This file is part of StaticMap project.
 */
-package main
+package static
 
 import (
 	"bytes"

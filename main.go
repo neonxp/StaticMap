@@ -1,7 +1,12 @@
+/*
+Copyright © 2020 Alexander Kiryukhin <a.kiryukhin@mail.ru>
+This file is part of StaticMap project.
+*/
 package main
 
 import (
 	"github.com/labstack/echo/v4"
+	"github.com/neonxp/StaticMap/pkg/static"
 	"log"
 	"strconv"
 )
@@ -35,7 +40,7 @@ func main() {
 		if zoom > 20 {
 			zoom = 20
 		}
-		img, err := GetMapImage(lat, lon, zoom, w, h)
+		img, err := static.GetMapImage(lat, lon, zoom, w, h)
 		if err != nil {
 			return err
 		}
