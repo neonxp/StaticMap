@@ -26,7 +26,7 @@ const (
 	th       = 256
 )
 
-func GetMapImage(lat, lon float64, zoom, width, height int) ([]byte, error) {
+func GetMapImage(lat, lon float64, zoom, width, height int) (image.Image, error) {
 	x, y, dx, dy := getCoords(lat, lon, zoom)
 	dst := imaging.New(width, height, color.NRGBA{0, 255, 0, 255})
 	wg := sync.WaitGroup{}
@@ -57,13 +57,17 @@ func GetMapImage(lat, lon float64, zoom, width, height int) ([]byte, error) {
 				tx := cx + i*tw - di
 				ty := cy + j*th - dj
 				dst = imaging.Paste(dst, img, image.Pt(tx, ty))
-			}(int(i), int(j))
+			}(i, j)
 		}
 	}
 	wg.Wait()
 
+	return dst, nil
+}
+
+func AsBytes(image image.Image) ([]byte,error)  {
 	out := bytes.NewBuffer([]byte{})
-	if err := imaging.Encode(out, dst, imaging.PNG); err != nil {
+	if err := imaging.Encode(out, image, imaging.PNG); err != nil {
 		return nil, err
 	}
 	return out.Bytes(), nil

@@ -44,7 +44,11 @@ func main() {
 		if err != nil {
 			return err
 		}
-		return c.Blob(200, "image/png", img)
+		blob, err := static.AsBytes(img)
+		if err != nil {
+			return err
+		}
+		return c.Blob(200, "image/png", blob)
 	})
 	log.Fatal(e.Start(":8000"))
 }
